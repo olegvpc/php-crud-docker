@@ -37,12 +37,10 @@ updated_at - datetime - дата обновления элемента
 #### 4: FrontEnd не делал в связи с отсутствием требований в ТЗ
 ![main](https://github.com/olegvpc/php-crud-docker/blob/main/images/main.png?raw=true)
 
-#### 7: История изменений 
+#### 5: Редактирование записи
 ![edit](https://github.com/olegvpc/php-crud-docker/blob/main/images/edit.png?raw=true)
-#### 8: Подключены русские варианты сообщений верификации
-#### 9: Выводится сообщение при создании записи в ВD (через запись в session())
+#### 6: История изменений 
 ![change](https://github.com/olegvpc/php-crud-docker/blob/main/images/change.png?raw=true)
-#### 10: Настроены route(End-points) как для записи данных из формы, так и через API
 
 ### Установка BackEnd (запускается локально в Docker)
 * 1: clone repository
@@ -76,3 +74,7 @@ use php_crud;
 ```
 http://localhost:8000
 ``` 
+### Не Выполнено:
+- Валидация полей сущности
+- Тестами покрывается и функционал и БД
+- Использование token для доступа к данным
