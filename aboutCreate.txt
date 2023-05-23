@@ -1,0 +1,79 @@
+Simple Create, Read, Update, Delete (CRUD) in PHP & MySQL
+========
+
+A simple and basic system to add, edit, delete and view using PHP and MySQL. 
+
+Blog Article: [Very simple add, edit, delete, view in PHP & MySQL](http://blog.chapagain.com.np/very-simple-add-edit-delete-view-in-php-mysql/)
+
+SQL script to create database and tables is present in **database.sql** file.
+
+php -S 127.0.0.1:3000
+
+запуск через Docker
+docker build -t php_crud_img .
+
+docker run -p 3000:80 -d php_crud_img
+d5029d73589a3cadc2f7d97cfe5306b220fa5ed0ba5cb624af228870e45b705b
+
+запуск через docker-compose.yml
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-php-crud
+    command: --default-authentication-plugin=mysql_native_password
+    # working_dir: /application
+    # volumes:
+    #   - .:/application
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      # - MYSQL_DATABASE=php_crud
+      # - MYSQL_USER=root
+      # - MYSQL_PASSWORD=root
+    ports:
+      - "3306:3306"
+  website:
+    container_name: php_crud
+    image: php_crud_img
+    build:
+      context: ./
+    volumes:
+      - /Users/olegvpc/PHP/php-crud-docker/src:/var/www/html
+    ports:
+      - 3000:80
+    depends_on:
+      - mysql
+
+docker-compose up -d
+
+mysql -u root -p
+
+mysql> create database php_crud;
+Query OK, 1 row affected (0.03 sec)
+
+use php_crud;
+
+
+```
+CREATE TABLE `items` (
+  `id` int(11) NOT NULL auto_increment, 
+  `name` varchar(255), 
+  `phone` varchar(15),
+  `key` varchar(25) NOT NULL,
+  PRIMARY KEY (`id`));
+```
+
+ 
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+###  ======================================================
+olegvpc@192 php-crud-docker % ```docker-compose exec shell```
+root@874b9d6f3a6f:/var/www/html# 
+=======================================================
+
+root@874b9d6f3a6f:/var/www/html# ```apt-get update```
+root@874b9d6f3a6f:/var/www/html# apt-get install vim
+
+https://www.section.io/engineering-education/dockerized-php-apache-and-mysql-container-development-environment/
+
