@@ -47,32 +47,34 @@ updated_at - datetime - дата обновления элемента
 ### Установка BackEnd (запускается локально в Docker)
 * 1: clone repository
 ``` 
-git clone https://github.com/olegvpc/laravel-riit.git
+git clone https://github.com/olegvpc/php-crud-docker.git
 ```
 * 2: cd to work-project
 
-* 3: for short record use ALIAS
-```
-alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
-```
-* 4: To start all of the Docker containers in the background, you may start Sail in "detached" mode:
+* 3: To start all of the Docker containers in the background, you may start docker-compose in "detached" mode:
 ```shell
-sail up -d
+docker-compose up -d
 ```
-* 5: Run MIGRATION
+* 4: Create DATABASE and Table
 ```shell
-sail artisan migrate 
+create database php_crud;
 ```
-* 6: You may use the shell command to connect to your application's container, allowing you to inspect its files and installed services as well execute arbitrary shell commands within the container:
-```shell
-sail shell
 ```
-* 7: for install all dependencies
-```shell
-composer dump
+use php_crud;
+```
+```
+ CREATE TABLE `items` (
+  `id` int(11) NOT NULL auto_increment, 
+  `name` char(255), 
+  `phone` char(15),
+  `key` char(25) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`));
 ```
 
-* 8: Project run: 
+
+* 5: Project run: 
 ```
-http://localhost:80
+http://localhost:8000
 ``` 
