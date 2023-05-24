@@ -1,3 +1,7 @@
+<?php  
+	session_start();
+	$_SESSION["token"] = bin2hex(random_bytes(32)); 
+?>
 <?php
 // Include the database connection file
 require_once("dbConnection.php");
@@ -32,6 +36,7 @@ $key = $resultData['key'];
 				<td>Name</td>
 				<td><input type="text" name="name" value="<?php echo $name; ?>"></td>
 			</tr>
+			<input type="hidden" name="token" value="<?=$_SESSION["token"]?>">
 			<tr> 
 				<td>phone</td>
 				<td><input type="text" name="phone" value="<?php echo $phone; ?>"></td>

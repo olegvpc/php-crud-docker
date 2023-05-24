@@ -7,6 +7,8 @@ Blog Article: [Very simple add, edit, delete, view in PHP & MySQL](http://blog.c
 
 SQL script to create database and tables is present in **database.sql** file.
 
+https://www.section.io/engineering-education/dockerized-php-apache-and-mysql-container-development-environment/
+
 php -S 127.0.0.1:3000
 
 запуск через Docker
@@ -56,11 +58,13 @@ use php_crud;
 
 
 ```
-CREATE TABLE `items` (
+  CREATE TABLE `items` (
   `id` int(11) NOT NULL auto_increment, 
-  `name` varchar(255), 
-  `phone` varchar(15),
-  `key` varchar(25) NOT NULL,
+  `name` char(255), 
+  `phone` char(15),
+  `key` char(25) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`));
 ```
 

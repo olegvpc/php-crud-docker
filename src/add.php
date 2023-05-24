@@ -1,3 +1,7 @@
+<?php  
+	session_start();
+	$_SESSION["token"] = bin2hex(random_bytes(32)); 
+?>
 <html>
 <head>
 	<title>Add Data</title>
@@ -14,6 +18,7 @@
 			<tr> 
 				<td>Name</td>
 				<td><input type="text" name="name"></td>
+				<input type="hidden" name="token" value="<?=$_SESSION["token"]?>">
 			</tr>
 			<tr> 
 				<td>Phone</td>

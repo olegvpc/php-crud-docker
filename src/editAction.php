@@ -1,3 +1,6 @@
+<?php  
+	session_start();
+?>
 <?php
 // Include the database connection file
 require_once("dbConnection.php");
@@ -24,8 +27,16 @@ if (isset($_POST['update'])) {
 			echo "<font color='red'>Key field is empty.</font><br/>";
 		}
 	} else {
-		// Update the database table
-		$result = mysqli_query($mysqli, "UPDATE items SET `name` = '$name', `phone` = '$phone', `key` = '$key', `updated_at` = CURRENT_TIMESTAMP WHERE `id` = $id");
+		if (isset($_POST["token"]) && isset($_SESSION["token"]) && $_POST["token"]==$_SESSION["token"]) { 
+			// Update the database table
+			$result = mysqli_query($mysqli, "UPDATE items SET `name` = '$name', `phone` = '$phone', `key` = '$key', `updated_at` = CURRENT_TIMESTAMP WHERE `id` = $id");
+
+		} else {
+			$post_token = $_POST["token"];
+			$session_token = $_SESSION["token"];
+			echo "<p><font color='red'>WRONG TOKEN - $post_token NOT EQUAL $session_token </p>";
+		}
+		
 		
 		// Display success message
 		echo "<p><font color='green'>Data updated successfully!</p>";

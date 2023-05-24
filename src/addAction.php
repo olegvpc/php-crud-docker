@@ -1,3 +1,6 @@
+<?php  
+	session_start();
+?>
 <html>
 <head>
 	<title>Add Data</title>
@@ -31,10 +34,15 @@ if (isset($_POST['submit'])) {
 		// Show link to the previous page
 		echo "<br/><a href='javascript:self.history.back();'>Go Back</a>";
 	} else { 
-		// If all the fields are filled (not empty) 
-
-		// Insert data into database
-		$result = mysqli_query($mysqli, "INSERT INTO items (name, phone, `key`) VALUES ('$name', '$phone', '$key')");
+		// If all the fields are filled (not empty) and token is OK
+		if (isset($_POST["token"]) && isset($_SESSION["token"]) && $_POST["token"]==$_SESSION["token"]) { 
+			// Insert data into database
+			$result = mysqli_query($mysqli, "INSERT INTO items (name, phone, `key`) VALUES ('$name', '$phone', '$key')");
+		} else {
+			$post_token = $_POST["token"];
+			$session_token = $_SESSION["token"];
+			echo "<p><font color='red'>WRONG TOKEN - $post_token NOT EQUAL $session_token </p>";
+		}
 		
 		// Display success message
 		echo "<p><font color='green'>Data added successfully!</p>";
